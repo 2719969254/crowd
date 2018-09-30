@@ -19,11 +19,28 @@ public class ImageUtil {
 	 * @param thumName 缩略图path
 	 * @return String
 	 */
-	public static String storeThumbnail(String standardImgPath, String thumName,Integer width,Integer height) {
+
+	public static String storeThumbnail(File standardImgPath, File thumName,Integer width,Integer height) {
+
+		System.out.println(standardImgPath+"--------------------");
+		if (standardImgPath.isFile()) {
+			try {
+				System.out.println(thumName+"++++++++++++++++++++++++++");
+				Thumbnails.of(standardImgPath).size(width, height).toFile(thumName);
+				return thumName.getName();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	/*public static String storeThumbnail(File standardImgPath, File thumName,Integer width,Integer height) {
 		File file = new File(standardImgPath);
+		System.out.println(file+"--------------------");
 		if (file.isFile()) {
 			try {
 				File outFIle = new File(thumName);
+				System.out.println(thumName+"++++++++++++++++++++++++++");
 				Thumbnails.of(file).size(width, height).toFile(outFIle);
 				return outFIle.getName();
 			} catch (IOException e) {
@@ -31,5 +48,5 @@ public class ImageUtil {
 			}
 		}
 		return null;
-	}
+	}*/
 }

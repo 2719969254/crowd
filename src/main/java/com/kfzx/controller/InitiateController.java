@@ -3,12 +3,14 @@ package com.kfzx.controller;
 import com.kfzx.entity.Initiate;
 import com.kfzx.service.InitiateService;
 import com.kfzx.utils.ImageUtil;
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -49,29 +51,37 @@ public class InitiateController {
 
 	@RequestMapping(value = "/upLoad", method = RequestMethod.POST)
 	@ResponseBody
-	public String upLoad(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws UnsupportedEncodingException {
+	public String upLoad(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
 		//编写图片上传的业务逻辑方法
 		// 获取图片名称
 		String filename = file.getOriginalFilename();
-		System.out.println(filename);
-		//获取图片扩展名
+		/*
+		获取图片扩展名
 		String ext = filename.substring(filename.lastIndexOf(".") + 1);
-		// 生成图片名称
-		// 自己写的一个获取字符串的方法作为图片名称
-		// 生成图片的存放在服务器的路径
+		生成图片的存放在服务器的路径
+		*/
 		String path = "/imgs/" + filename;
-		//生成一个绝对路径用于生成缩略图
-		String realPath = "F:/IDEA/crowd/target/crowd/imgs/" + filename;
+		File newFile = null;
+		if(!file.isEmpty()){
+			CommonsMultipartFile commonsmultipartfile = (CommonsMultipartFile) file;
+			DiskFileItem diskFileItem = (DiskFileItem) commonsmultipartfile.getFileItem();
+			newFile = diskFileItem.getStoreLocation();
+		}
 		//生成一个绝对路径用于保存展示缩略图
-		String realMinPath = "F:/IDEA/crowd/target/crowd/imgs/" + filename + ".png";
+		File realMinPath =  new File("C:/imgs/" + filename+ ".png");
 		//生成一个绝对路径用于保存详情缩略图
-		String realMaxPath = "F:/IDEA/crowd/target/crowd/imgs/" + filename + ".png.png";
+		File realMaxPath =  new File("C:/imgs/" + filename + ".png.png");
 		// 生成两张缩略图
-		ImageUtil.storeThumbnail(realPath, realMinPath,121,121);
-		ImageUtil.storeThumbnail(realPath, realMaxPath,400,370);
+		assert newFile != null;
+		ImageUtil.storeThumbnail(newFile, realMinPath, 121, 121);
+		ImageUtil.storeThumbnail(newFile, realMaxPath, 400, 370);
 		// 获取服务器的绝对路径进行保存图片
-		String url = request.getSession().getServletContext().getRealPath("") + path;
+		//String url = request.getSession().getServletContext().getRealPath("") + path;
+		String url = "C:" + path;
+		System.out.println(url);
 		// 图片上传
+		// TODO: 2018/10/1 上传服务器需要修改之处
+		//String realUrl = "http://47.95.234.255:8080/crowd/imgs/" + filename;
 		String realUrl = "http://127.0.0.1/imgs/" + filename;
 		try {
 			InputStream in = file.getInputStream();
