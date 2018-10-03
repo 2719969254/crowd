@@ -35,7 +35,11 @@ public class InitiateServiceImpl implements InitiateService {
 		Double neednumber = Double.valueOf(request.getParameter("neednumber"));
 		Double mynumber = Double.valueOf(request.getParameter("mynumber"));
 		String desces = request.getParameter("desces");
-		String place = request.getParameter("place");
+		String place1 = request.getParameter("province");
+		String place2 = request.getParameter("city");
+		String place3 = request.getParameter("town");
+		String place4 = request.getParameter("place");
+		String place = place1+"省"+place2+place3+place4;
 		String ceasetime = request.getParameter("ceasetime");
 		Initiate initiate = new Initiate();
 		initiate.setName(name);
