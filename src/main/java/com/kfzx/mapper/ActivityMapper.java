@@ -2,8 +2,9 @@ package com.kfzx.mapper;
 
 import com.kfzx.entity.Activity;
 import com.kfzx.entity.ActivityExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ActivityMapper {
     int countByExample(ActivityExample example);

@@ -9,6 +9,8 @@ public class Activity {
 
     private String enjoytime;
 
+    private Integer pid;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class Activity {
 
     public void setEnjoytime(String enjoytime) {
         this.enjoytime = enjoytime == null ? null : enjoytime.trim();
+    }
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 }

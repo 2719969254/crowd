@@ -36,7 +36,7 @@ public class InitiateServiceImpl implements InitiateService {
 		Double mynumber = Double.valueOf(request.getParameter("mynumber"));
 		String desces = request.getParameter("desces");
 		String place = request.getParameter("place");
-		String ceasetime = request.getParameter("input_date");
+		String ceasetime = request.getParameter("ceasetime");
 		Initiate initiate = new Initiate();
 		initiate.setName(name);
 		initiate.setNeednumber(neednumber);

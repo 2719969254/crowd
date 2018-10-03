@@ -4,6 +4,7 @@ import com.kfzx.entity.Activity;
 import com.kfzx.service.ActivityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +26,9 @@ public class ActivityController {
 	public List<Activity> selectActivityByUid(HttpServletRequest request, HttpServletResponse response){
 		return activityService.selectActivity(request,response);
 	}
-	@RequestMapping("/addActivity")
-	public void addActivity(HttpServletRequest request, HttpServletResponse response){
-		activityService.addActivity(request,response);
+	@RequestMapping("/insertActivity")
+	@ResponseBody
+	public Integer addActivity(HttpServletRequest request, HttpServletResponse response){
+		return activityService.addActivity(request, response);
 	}
 }

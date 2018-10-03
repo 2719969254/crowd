@@ -27,6 +27,7 @@ public interface ActivityService {
 	 * 添加众筹
 	 * @param request
 	 * @param response
+	 * @return Integer
 	 */
-	void addActivity(HttpServletRequest request, HttpServletResponse response);
+	Integer addActivity(HttpServletRequest request, HttpServletResponse response);
 }
