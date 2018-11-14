@@ -81,7 +81,7 @@ public class InitiateController {
 		System.out.println(url);
 		// 图片上传
 		// TODO: 2018/10/1 上传服务器需要修改之处
-		String realUrl = "http://47.95.234.255:8080/crowd/imgs/" + filename;
+		String realUrl = "http://47.95.234.255:80/crowd/imgs/" + filename;
 		//String realUrl = "http://127.0.0.1/imgs/" + filename;
 		try {
 			InputStream in = file.getInputStream();
