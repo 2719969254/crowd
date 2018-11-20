@@ -60,7 +60,7 @@ public class InitiateController {
 		String ext = filename.substring(filename.lastIndexOf(".") + 1);
 		生成图片的存放在服务器的路径
 		*/
-		String path = "/imgs/" + filename;
+		String path = "/usr/local/work/crowd/" + filename;
 		File newFile = null;
 		if(!file.isEmpty()){
 			CommonsMultipartFile commonsmultipartfile = (CommonsMultipartFile) file;
@@ -68,16 +68,16 @@ public class InitiateController {
 			newFile = diskFileItem.getStoreLocation();
 		}
 		//生成一个绝对路径用于保存展示缩略图
-		File realMinPath =  new File("C:/imgs/" + filename+ ".png");
+		File realMinPath =  new File("/usr/local/work/crowd/" + filename+ ".png");
 		//生成一个绝对路径用于保存详情缩略图
-		File realMaxPath =  new File("C:/imgs/" + filename + ".png.png");
+		File realMaxPath =  new File("/usr/local/work/crowd/" + filename + ".png.png");
 		// 生成两张缩略图
 		assert newFile != null;
 		ImageUtil.storeThumbnail(newFile, realMinPath, 121, 121);
 		ImageUtil.storeThumbnail(newFile, realMaxPath, 400, 370);
 		// 获取服务器的绝对路径进行保存图片
 		//String url = request.getSession().getServletContext().getRealPath("") + path;
-		String url = "C:" + path;
+		String url = "" + path;
 		System.out.println(url);
 		// 图片上传
 		// TODO: 2018/10/1 上传服务器需要修改之处
